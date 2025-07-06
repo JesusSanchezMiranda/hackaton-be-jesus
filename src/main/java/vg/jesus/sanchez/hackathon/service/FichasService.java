@@ -20,5 +20,7 @@ public interface FichasService {
     void delete(Integer id);
 
     void restore(Integer id);
+
+    byte[] generateJasperPdfReport() throws Exception;
     
 }

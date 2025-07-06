@@ -1,12 +1,20 @@
 package vg.jesus.sanchez.hackathon.service.Impl;
 
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import javax.sql.DataSource;
+
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import vg.jesus.sanchez.hackathon.model.Fichas;
 import vg.jesus.sanchez.hackathon.repository.FichasRepository;
 import vg.jesus.sanchez.hackathon.service.FichasService;
@@ -16,9 +24,11 @@ import vg.jesus.sanchez.hackathon.service.FichasService;
 public class FichasServiceImpl implements FichasService{
 
     private final FichasRepository fichasRepository;
+    private final DataSource dataSource;
 
-    public FichasServiceImpl(FichasRepository fichasRepository){
+    public FichasServiceImpl(FichasRepository fichasRepository, DataSource dataSource){
         this.fichasRepository = fichasRepository;
+        this.dataSource = dataSource;
     }
 
     @Override
@@ -83,6 +93,19 @@ public Fichas update(Fichas nuevaFicha) {
                 fichasRepository.save(em);
             }
         ); 
+    }
+
+    @Override
+    public byte[] generateJasperPdfReport() throws Exception {
+        // Cargar archivo .jasper en src/main/resources/reports (SIN USAR IMÁGENES EN EL JASPER)
+        InputStream jasperStream = new ClassPathResource("reports/fichas_report.jasper").getInputStream();
+        // Sin parámetros
+        HashMap<String, Object> params = new HashMap<>();
+        // Llenar reporte con conexión a Oracle Cloud con application.yml | aplicación.properties
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperStream, params, dataSource.getConnection());
+        // Exportar a PDF
+        log.info("Reporte Jasper en PDF");
+        return JasperExportManager.exportReportToPdf(jasperPrint);
     }
 
     

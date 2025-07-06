@@ -29,7 +29,7 @@ public class Fichas {
     private String titulo;
 
     @Column(name = "anio_publicacion")
-    private Integer anio_publicacion;
+    private LocalDate anio_publicacion;
 
     @Column(name = "tema")
     private String tema;

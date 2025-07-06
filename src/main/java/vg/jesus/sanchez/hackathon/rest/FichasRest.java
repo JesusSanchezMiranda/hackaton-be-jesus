@@ -3,6 +3,9 @@ package vg.jesus.sanchez.hackathon.rest;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +65,21 @@ public class FichasRest {
     @PutMapping("/restore/{id}")
     public void restore(@PathVariable Integer id) {
         fichasService.restore(id);
+    }
+
+     @GetMapping("/pdf")
+    public ResponseEntity<byte[]> generateJasperPdfReport() {
+        try {
+            byte[] pdf = fichasService.generateJasperPdfReport();
+            return ResponseEntity.ok()
+                    //Renombrar el archivo PDF al descargar
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=fichas_report.pdf")
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdf);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
     }
         
     
