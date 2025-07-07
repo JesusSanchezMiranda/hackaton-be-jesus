@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "9303aed0-af34-4de6-8eab-18b0cc4e92d3",
+		"name": "Fichas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43465894"
+	},
+	"item": [
+		{
+			"name": "Fichas_folder",
+			"item": [
+				{
+					"name": "LISTADO GENERAL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/v1/api/fichas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"v1",
+								"api",
+								"fichas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LISTADO POR ESTADO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/v1/api/fichas/estado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"v1",
+								"api",
+								"fichas",
+								"estado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LISTADO POR ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/v1/api/fichas/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"v1",
+								"api",
+								"fichas",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GUARDADO DE DATOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"autor\": \"Mario Vargas Llosa\",\r\n        \"titulo\": \"La Fiesta del Chivo\",\r\n        \"anio_publicacion\": 2000,\r\n        \"tema\": \"Literatura\",\r\n        \"tipo_ficha\": \"libro\",\r\n        \"editorial\": \"Alfaguara\",\r\n        \"numero_edicion\": 1,\r\n        \"numero_paginas\": 520\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/v1/api/fichas/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"v1",
+								"api",
+								"fichas",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACTUALIZADO DE DATOS",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"autor\": \"Mario Vargas Llosa\",\r\n        \"titulo\": \"La Fiesta del Chivo\",\r\n        \"anio_publicacion\": 2000,\r\n        \"tema\": \"Literatura\",\r\n        \"tipo_ficha\": \"libro\",\r\n        \"editorial\": \"Alfaguara\",\r\n        \"numero_edicion\": 5,\r\n        \"numero_paginas\": 790\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/v1/api/fichas/update/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"v1",
+								"api",
+								"fichas",
+								"update",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINADO LOGICO",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"autor\": \"Mario Vargas Llosa\",\r\n        \"titulo\": \"La Fiesta del Chivo\",\r\n        \"anio_publicacion\": 2000,\r\n        \"tema\": \"Literatura\",\r\n        \"tipo_ficha\": \"libro\",\r\n        \"editorial\": \"Alfaguara\",\r\n        \"numero_edicion\": 4,\r\n        \"numero_paginas\": 740\r\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8086/v1/api/fichas/delete/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"v1",
+								"api",
+								"fichas",
+								"delete",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RESTAURADO LOGICO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"autor\": \"Mario Vargas Llosa\",\r\n        \"titulo\": \"La Fiesta del Chivo\",\r\n        \"anio_publicacion\": 2000,\r\n        \"tema\": \"Literatura\",\r\n        \"tipo_ficha\": \"libro\",\r\n        \"editorial\": \"Alfaguara\",\r\n        \"numero_edicion\": 4,\r\n        \"numero_paginas\": 740\r\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8086/v1/api/fichas/restore/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"v1",
+								"api",
+								"fichas",
+								"restore",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GENERACION DE REPORTE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8086/v1/api/fichas/pdf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"v1",
+								"api",
+								"fichas",
+								"pdf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
