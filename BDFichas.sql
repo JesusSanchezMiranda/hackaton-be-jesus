@@ -32,17 +32,17 @@ USE fichasBD;
 
 CREATE TABLE fichas (
     id INT IDENTITY(1,1),
-    autor NVARCHAR(255) NOT NULL CHECK (autor NOT LIKE '%[^A-Za-z áéíóúÁÉÍÓÚñÑ]%'),
-    titulo NVARCHAR(255) NOT NULL,
+    autor VARCHAR(255) NOT NULL CHECK (autor NOT LIKE '%[^A-Za-z áéíóúÁÉÍÓÚñÑ]%'),
+    titulo VARCHAR(255) NOT NULL,
     anio_publicacion DATE NOT NULL CHECK (YEAR(anio_publicacion) BETWEEN 1000 AND YEAR(GETDATE())),
-    tema NVARCHAR(100) NOT NULL,
+    tema VARCHAR(100) NOT NULL,
     fecha_agregada DATE NOT NULL DEFAULT GETDATE(),
 
-    tipo_ficha NVARCHAR(20) NOT NULL CHECK (
+    tipo_ficha VARCHAR(20) NOT NULL CHECK (
         tipo_ficha IN ('libro', 'artículo', 'tesis', 'video', 'periódico', 'repositorio')
     ),
 
-    editorial NVARCHAR(150) NULL,
+    editorial VARCHAR(150) NULL,
     numero_edicion INT NULL CHECK (numero_edicion > 0),
     numero_paginas INT NULL CHECK (numero_paginas > 0),
 
@@ -77,6 +77,20 @@ INSERT INTO fichas (autor, titulo, anio_publicacion, tema, tipo_ficha)
 VALUES ('Repositorio UNMSM', 'Base de datos de investigaciones 2023', '2023-12-01', 'Investigación Académica', 'repositorio');
 
 
+--Actualziado de ficha--
+UPDATE fichas SET numero_edicion = '3', numero_paginas = '20' WHERE id = 2;
 
+--Eliminado logico
+UPDATE fichas SET estado = 0 WHERE id = 2;
 
+--Restaurado logico
+UPDATE fichas SET estado = 1 WHERE id = 2;
+
+-- Listado general
+SELECT * FROM fichas;
+
+--Listado de Activos
 SELECT * FROM fichas WHERE estado = 1;
+
+--Listado de Inactivos
+SELECT * FROM fichas WHERE estado = 0;
